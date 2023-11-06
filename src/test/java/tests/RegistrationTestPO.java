@@ -22,10 +22,9 @@ public class RegistrationTestPO extends TestBase {
                 .setCurrentAddress("Moscow BC 11")
                 .setState("NCR")
                 .setCity("Noida")
-                .clickSubmit();
+                .clickSubmit()
 
-
-        registrationPage.checkResult("Student Name", "Ann Tser")
+                .checkResult("Student Name", "Ann Tser")
                 .checkResult("Student Email", "ann@tser.com")
                 .checkResult("Mobile", "0123456789")
                 .checkResult("Subjects", "Math")
