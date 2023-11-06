@@ -6,43 +6,44 @@ import pages.components.CalendarComponent;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
 
 public class RegistrationPage {
 
-
-    ////    SelenideElements
 
     CalendarComponent calendar = new CalendarComponent();
     SelenideElement titleLabel = $(".practice-form-wrapper"),
             firstNameInput = $("#firstName"),
             lastNameInput = $("#lastName"),
             userEmailInput = $("#userEmail"),
-            genderWrapper =   $("#genterWrapper"),
-            userNumberInput = $("#userNumber");
+            genderWrapper = $("#genterWrapper"),
+            userNumberInput = $("#userNumber"),
+            userSubjectInput = $("#subjectsInput"),
+            hobbiesWrapper = $("#hobbiesWrapper"),
+            userFileInput = $("#uploadPicture"),
+            userCurrentAddress = $("#currentAddress"),
+            userState = $("#state"),
+            userCity = $("#city"),
+            submitButton = $("#submit"),
+            result = $(".modal-content");
 
 
-   //// Actions
-
-    public RegistrationPage openPage() {
-        open("/automation-practice-form");
+    public RegistrationPage openPage(String value) {
+        open(value);
         titleLabel.shouldHave(text("Student Registration Form"));
-        executeJavaScript("$('#fixedban').remove()");
-        executeJavaScript("$('footer').remove()");
-
         return this;
     }
 
+    public RegistrationPage executeJS(String value) {
+        executeJavaScript(value);
+        return this;
+
+    }
 
     public RegistrationPage setFirstName(String value) {
         firstNameInput.setValue(value);
 
         return this;
     }
-
-//    public void clickFirstName(String value) { //not used only for info
-//        firstNameInput.click();
-//    }
 
     public RegistrationPage setLastName(String value) {
         lastNameInput.setValue(value);
@@ -57,17 +58,17 @@ public class RegistrationPage {
     }
 
 
-   public RegistrationPage setGender(String value) {
-       genderWrapper.$(byText(value)).click();
+    public RegistrationPage setGender(String value) {
+        genderWrapper.$(byText(value)).click();
 
-       return this;
-   }
+        return this;
+    }
 
-   public RegistrationPage setUserNumber(String value) {
-       userNumberInput.setValue(value);
+    public RegistrationPage setUserNumber(String value) {
+        userNumberInput.setValue(value);
 
-            return this;
-   }
+        return this;
+    }
 
     public RegistrationPage setDateOfBirth(String day, String month, String year) {
         $("#dateOfBirthInput").click();
@@ -76,13 +77,61 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage checkResult(String key, String value) {
-        $(".table-responsive").$(byText(key)).parent()
-                .shouldHave(text(value));
+
+    public RegistrationPage setSubjects(String value) {
+        userSubjectInput.setValue(value).pressEnter();
+
+        return this;
+
+    }
+
+    public RegistrationPage setHobbies(String value) {
+        hobbiesWrapper.$(byText(value)).click();
+
+        return this;
+
+    }
+
+    public RegistrationPage setFile(String value) {
+        userFileInput.uploadFromClasspath(value);
+
+        return this;
+
+    }
+
+    public RegistrationPage setCurrentAddress(String value) {
+        userCurrentAddress.setValue(value);
+
+        return this;
+
+    }
+
+    public RegistrationPage setState(String value) {
+        userState.click();
+        userState.$(byText(value)).click();
 
         return this;
     }
 
+    public RegistrationPage setCity(String value) {
+        userCity.click();
+        userCity.$(byText(value)).click();
+
+        return this;
+
+    }
+
+    public RegistrationPage clickSubmit() {
+        submitButton.click();
+        return this;
+    }
+
+    public RegistrationPage checkResult(String key, String value) {
+        result.$(byText(key)).parent()
+                .shouldHave(text(value));
+
+        return this;
+    }
 
 
 }
