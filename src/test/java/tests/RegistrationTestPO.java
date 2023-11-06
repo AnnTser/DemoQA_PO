@@ -1,32 +1,37 @@
-package examples;
+package tests;
 
-import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.Selenide;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
+import com.codeborne.selenide.SelenideElement;
+import examples.TestBase;
 import org.junit.jupiter.api.Test;
+import pages.RegistrationPage;
 
 import static com.codeborne.selenide.Condition.appear;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 
-public class RegistrationTests extends TestBase {
+public class RegistrationTestPO extends TestBase {
+
+    RegistrationPage registrationPage =  new RegistrationPage();
 
 
     @Test
     void succesfulRegistrationTest() {
-        open("/automation-practice-form");
-        String userName = "Ann";
-        $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
-        executeJavaScript("$('#fixedban').remove()");
-        executeJavaScript("$('footer').remove()");
 
 
-        $("#lastName").setValue("Tser");
-        $("#userEmail").setValue("ann@tser.com");
-        $("#genterWrapper").$(byText("Other")).click();
-        $("#userNumber").setValue("0123456789");
+        registrationPage.openPage()
+                .setFirstName ("Ann")
+                .setLastName ("Tser")
+                .setUserEmail ("ann@tser.com")
+                .setGender("Other")
+                .setUserNumber ("0123456789");
+
+
+
+
+
+
         $("#dateOfBirthInput").click();
         $(".react-datepicker__month-select").selectOption("July");
         $(".react-datepicker__year-select").selectOption("1990");
@@ -55,9 +60,12 @@ public class RegistrationTests extends TestBase {
         $(".table-responsive").shouldHave(text("NCR Noida"));
     }
 
-    @AfterEach
-    void afterEach() {
-        Selenide.closeWebDriver();
+
+
     }
+
+
+
+
 
 }
