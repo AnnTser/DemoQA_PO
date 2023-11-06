@@ -1,6 +1,7 @@
 package pages;
 
 import com.codeborne.selenide.SelenideElement;
+import pages.components.CalendarComponent;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
@@ -11,6 +12,8 @@ public class RegistrationPage {
 
 
     ////    SelenideElements
+
+    CalendarComponent calendar = new CalendarComponent();
     SelenideElement titleLabel = $(".practice-form-wrapper"),
             firstNameInput = $("#firstName"),
             lastNameInput = $("#lastName"),
@@ -23,7 +26,6 @@ public class RegistrationPage {
 
     public RegistrationPage openPage() {
         open("/automation-practice-form");
-        String userName = "Ann";
         titleLabel.shouldHave(text("Student Registration Form"));
         executeJavaScript("$('#fixedban').remove()");
         executeJavaScript("$('footer').remove()");
@@ -66,4 +68,21 @@ public class RegistrationPage {
 
             return this;
    }
+
+    public RegistrationPage setDateOfBirth(String day, String month, String year) {
+        $("#dateOfBirthInput").click();
+        calendar.setDate("30", "July", "1990");
+
+        return this;
+    }
+
+    public RegistrationPage checkResult(String key, String value) {
+        $(".table-responsive").$(byText(key)).parent()
+                .shouldHave(text(value));
+
+        return this;
+    }
+
+
+
 }

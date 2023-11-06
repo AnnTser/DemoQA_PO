@@ -1,4 +1,4 @@
-package examples;
+//package examples;
 //ONLY FOR INFO!!!
 
 //package cloud.autotests.tests._other_patterns.page_objects.scenario;
