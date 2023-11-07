@@ -11,7 +11,9 @@ public class RegistrationPage {
 
 
     CalendarComponent calendar = new CalendarComponent();
-    SelenideElement titleLabel = $(".practice-form-wrapper"),
+
+    SelenideElement
+            titleLabel = $(".practice-form-wrapper"),
             firstNameInput = $("#firstName"),
             lastNameInput = $("#lastName"),
             userEmailInput = $("#userEmail"),
@@ -23,8 +25,9 @@ public class RegistrationPage {
             userCurrentAddress = $("#currentAddress"),
             userState = $("#state"),
             userCity = $("#city"),
-            submitButton = $("#submit"),
-            result = $(".modal-content");
+            submitButton = $("#submit");
+
+    //           result = $(".modal-content");
 
 
     public RegistrationPage openPage(String value) {
@@ -33,10 +36,10 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage executeJS(String value) {
-        executeJavaScript(value);
+    public RegistrationPage removeBanners() {
+        executeJavaScript("$('#fixedban').remove()");
+        executeJavaScript("$('footer').remove()");
         return this;
-
     }
 
     public RegistrationPage setFirstName(String value) {
@@ -123,13 +126,6 @@ public class RegistrationPage {
 
     public RegistrationPage clickSubmit() {
         submitButton.click();
-        return this;
-    }
-
-    public RegistrationPage checkResult(String key, String value) {
-        result.$(byText(key)).parent()
-                .shouldHave(text(value));
-
         return this;
     }
 
