@@ -1,10 +1,8 @@
 package tests;
 
 import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.logevents.SelenideLogger;
 import helpers.Attach;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.appear;
@@ -14,16 +12,26 @@ import static com.codeborne.selenide.Selenide.*;
 import static io.qameta.allure.Allure.step;
 import static tests.TestData.*;
 
-public class RegistrationTestsWithDataTests extends TestBase {
+public class RegistrationRemoteTests extends TestBase {
 
+    @AfterEach
+    void addAttachments() {
+        Attach.screenshotAs("Last screenshot");
+        Attach.pageSource();
+        Attach.browserConsoleLogs();
+        Attach.addVideo();
+    }
     @Test
     void succesfulRegistrationTest() {
+        step("Open form", () -> {
         open("/automation-practice-form");
         String userName = firstName;
         $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
         executeJavaScript("$('#fixedban').remove()");
         executeJavaScript("$('footer').remove()");
+        });
 
+        step("Fill form", () -> {
         $("#lastName").setValue(lastName);
         $("#userEmail").setValue(userEmail);
         $("#genterWrapper").$(byText(gender)).click();
@@ -41,7 +49,9 @@ public class RegistrationTestsWithDataTests extends TestBase {
         $("#city").click();
         $("#stateCity-wrapper").$(byText("Noida")).click();
         $("#submit").click();
+        });
 
+        step("Verify results", () -> {
         $(".modal-dialog").should(appear);
         $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
         $(".table-responsive").$(byText("Student Name")).parent().shouldHave(text("Ann" + " Tser"));
@@ -54,6 +64,7 @@ public class RegistrationTestsWithDataTests extends TestBase {
         $(".table-responsive").shouldHave(text("1.png"));
         $(".table-responsive").shouldHave(text("Moscow BC 11"));
         $(".table-responsive").shouldHave(text("NCR Noida"));
+        });
     }
 
     @AfterEach
