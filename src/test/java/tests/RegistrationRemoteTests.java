@@ -21,7 +21,6 @@ public class RegistrationRemoteTests extends TestBase {
         Attach.pageSource();
         Attach.browserConsoleLogs();
         Attach.addVideo();
-        Selenide.closeWebDriver();
         }
 
     @Tag ("demoqa")

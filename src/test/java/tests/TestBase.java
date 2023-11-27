@@ -33,4 +33,8 @@ public class TestBase {
     }
 
 
+    @AfterEach
+    void afterEach() {
+    Selenide.closeWebDriver();
+}
 }
