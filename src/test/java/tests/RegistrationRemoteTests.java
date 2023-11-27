@@ -3,6 +3,7 @@ package tests;
 import com.codeborne.selenide.Selenide;
 import helpers.Attach;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.appear;
@@ -13,7 +14,7 @@ import static io.qameta.allure.Allure.step;
 import static tests.TestData.*;
 
 public class RegistrationRemoteTests extends TestBase {
-
+    @Tag ("demoqa")
     @AfterEach
     void addAttachments() {
         Attach.screenshotAs("Last screenshot");
