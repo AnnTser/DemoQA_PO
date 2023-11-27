@@ -14,7 +14,7 @@ import static io.qameta.allure.Allure.step;
 import static tests.TestData.*;
 
 public class RegistrationRemoteTests extends TestBase {
-    @Tag ("demoqa")
+
     @AfterEach
     void addAttachments() {
         Attach.screenshotAs("Last screenshot");
@@ -22,6 +22,7 @@ public class RegistrationRemoteTests extends TestBase {
         Attach.browserConsoleLogs();
         Attach.addVideo();
     }
+    @Tag ("demoqa")
     @Test
     void succesfulRegistrationTest() {
         step("Open form", () -> {
@@ -33,6 +34,7 @@ public class RegistrationRemoteTests extends TestBase {
         });
 
         step("Fill form", () -> {
+        $("#firstName").setValue(firstName);
         $("#lastName").setValue(lastName);
         $("#userEmail").setValue(userEmail);
         $("#genterWrapper").$(byText(gender)).click();
@@ -53,8 +55,8 @@ public class RegistrationRemoteTests extends TestBase {
         });
 
         step("Verify results", () -> {
-        $(".modal-dialog").should(appear);
-        $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
+        $(".modal-content").should(appear);
+        $(".modal-content").shouldHave(text("Thanks for submitting the form"));
         $(".table-responsive").$(byText("Student Name")).parent().shouldHave(text("Ann" + " Tser"));
         $(".table-responsive").shouldHave(text("ann@tser.com"));
         $(".table-responsive").shouldHave(text("0123456789"));
