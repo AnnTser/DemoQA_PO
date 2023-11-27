@@ -1,3 +1,5 @@
+import static sun.security.util.Event.report
+
 plugins {
     id 'java-library'
     id 'io.qameta.allure' version '2.11.2'

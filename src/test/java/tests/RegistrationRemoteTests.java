@@ -21,7 +21,9 @@ public class RegistrationRemoteTests extends TestBase {
         Attach.pageSource();
         Attach.browserConsoleLogs();
         Attach.addVideo();
-    }
+        Selenide.closeWebDriver();
+        }
+
     @Tag ("demoqa")
     @Test
     void succesfulRegistrationTest() {
@@ -70,9 +72,5 @@ public class RegistrationRemoteTests extends TestBase {
         });
     }
 
-    @AfterEach
-    void afterEach() {
-        Selenide.closeWebDriver();
-    }
 
 }
