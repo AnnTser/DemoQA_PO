@@ -49,15 +49,9 @@ tasks.withType(JavaCompile) {
 }
 
 
-task simple_test(type: Test) {
+task demoqa_test (type: Test) {
     useJUnitPlatform {
-        includeTags("simple")
+        includeTags("demoqa")
     }
 }
 
-test {
-    useJUnitPlatform()
-            {
-                includeTags("demoqa")
-            }
-}
