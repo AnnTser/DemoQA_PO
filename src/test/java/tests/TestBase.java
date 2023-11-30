@@ -10,20 +10,22 @@ import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import pages.RegistrationPage;
 import pages.components.TableResultComponent;
-
+import org.openqa.selenium.remote.DesiredCapabilities;
 import java.util.Map;
+
+import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 public class TestBase {
     RegistrationPage registrationPage =  new RegistrationPage();
     TableResultComponent tableResultComponent = new TableResultComponent();
     @BeforeAll
-    static void beforeAll() {
-        Configuration.baseUrl = "https://demoqa.com";
-        Configuration.browser = "chrome";
-        Configuration.browserSize = "1920x1080";
+    static void setUp() {
+        Configuration.baseUrl = System.getProperty("baseUrl", "https://demoqa.com");
+        Configuration.browserVersion = System.getProperty("version","98");;
+        Configuration.browser = System.getProperty("browser","chrome");
+        Configuration.browserSize = System.getProperty("size", "1920X1280");
+        Configuration.remote = System.getProperty("remote", "https://user1:1234@selenoid.autotests.cloud/wd/hub");
         Configuration.pageLoadStrategy = "eager";
-//        Configuration.holdBrowserOpen = true;
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
                 "enableVNC", true,
@@ -39,10 +41,7 @@ public class TestBase {
         Attach.pageSource();
         Attach.browserConsoleLogs();
         Attach.addVideo();
-
+        closeWebDriver();
     }
-    @AfterEach
-    void afterEach() {
-    Selenide.closeWebDriver();
-}
+
 }
