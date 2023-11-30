@@ -16,14 +16,6 @@ import static tests.TestData.*;
 
 public class RegistrationRemoteTests extends TestBase {
 
-    @AfterEach
-    void addAttachments() {
-        Attach.screenshotAs("Last screenshot");
-        Attach.pageSource();
-        Attach.browserConsoleLogs();
-        Attach.addVideo();
-        }
-
     @Tag ("demoqa")
     @Description ("Succesfull Registration Test")
     @Test
