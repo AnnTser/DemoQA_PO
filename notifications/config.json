@@ -1,0 +1,18 @@
+{
+  "base": {
+    "logo": "",
+    "project": "DemoQA_PO",
+    "environment": "PROD",
+    "comment": "test telegram bot",
+    "reportLink": "",
+    "language": "ru",
+    "allureFolder": "build/allure-report/",
+    "enableChart": true
+  },
+  "telegram": {
+    "token": "6972626894:AAGVKPre3CxHaLC7IG1j2UYDfslFDUctids",
+    "chat": "-1001977344381",
+    "replyTo": ""
+  }
+
+}
