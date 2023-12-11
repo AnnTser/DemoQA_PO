@@ -1,12 +1,12 @@
 {
   "base": {
     "logo": "",
-    "project": "DemoQA_PO",
+    "project": "some_project",
     "environment": "PROD",
     "comment": "test telegram bot",
     "reportLink": "",
     "language": "ru",
-    "allureFolder": "build/allure-report/",
+    "allureFolder": "build/reports/allure-report/allureReport",
     "enableChart": true
   },
   "telegram": {
